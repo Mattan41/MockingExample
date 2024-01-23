@@ -47,4 +47,13 @@ class EmployeeTest {
 
     }
 
+    @Test
+    @DisplayName("setPaid sets paid to true for employee")
+    void setPaidSetsPaidToTrueForEmployee() {
+        Employee employee = new Employee("1", 1000);
+
+        employee.setPaid(true);
+
+        assertThat(employee.isPaid()).isTrue();
+    }
 }
