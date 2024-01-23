@@ -35,4 +35,16 @@ class EmployeeTest {
 
         assertThat(employee.getSalary()).isEqualTo(1000);
     }
+
+    @Test
+    @DisplayName("set salary for employee sets new salary for employee")
+    void setSalaryForEmployeeSetsNewSalaryForEmployee() {
+        Employee employee = new Employee("1", 1000);
+
+        employee.setSalary(2000);
+
+        assertThat(employee.getSalary()).isEqualTo(2000);
+
+    }
+
 }
