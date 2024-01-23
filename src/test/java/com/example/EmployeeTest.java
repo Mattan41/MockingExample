@@ -3,6 +3,7 @@ package com.example;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeTest {
@@ -13,6 +14,18 @@ class EmployeeTest {
         Employee employee = new Employee("1", 1000);
 
         assertEquals("1", employee.getId());
+    }
+
+    @Test
+    @DisplayName("setId sets new Id for Employee")
+    void setIdSetsNewIdForEmployee() {
+        Employee employee = new Employee("1", 1000);
+
+        employee.setId("2");
+
+        assertThat(employee.getId()).isEqualTo("2");
+
+
     }
 
 }
