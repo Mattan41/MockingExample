@@ -28,4 +28,11 @@ class EmployeeTest {
 
     }
 
+    @Test
+    @DisplayName("getSalary returns salary")
+    void getSalaryReturnsSalary() {
+        Employee employee = new Employee("1", 1000);
+
+        assertThat(employee.getSalary()).isEqualTo(1000);
+    }
 }
