@@ -59,6 +59,9 @@ class EmployeesTest {
             int payments = employees.payEmployees();
 
             assertThat(payments).isEqualTo(2);
+            assertThat(employeeRepository.findAll().get(0).isPaid()).isTrue();
+            assertThat(employeeRepository.findAll().get(1).isPaid()).isFalse();
+            assertThat(employeeRepository.findAll().get(2).isPaid()).isTrue();
 
     }
 
