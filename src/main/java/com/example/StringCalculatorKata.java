@@ -7,6 +7,9 @@ public class StringCalculatorKata {
 
         public static String addNumbers(String numbers) {
 
+            if (numbers.isEmpty())
+                return "0";
+
             String[] numbersArray = numbers.split(",");
             List<Integer> numbersList = new ArrayList<>();
 

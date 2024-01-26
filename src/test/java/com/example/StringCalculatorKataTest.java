@@ -28,4 +28,15 @@ class StringCalculatorKataTest {
 
             assertThat(result).isEqualTo("1");
     }
+
+    @Test
+    @DisplayName("given empty string when calling addNumbers then return zero")
+    void givenEmptyStringWhenCallingAddNumbersThenReturnZero() {
+
+            String emptyString = "";
+
+            String result = StringCalculatorKata.addNumbers(emptyString);
+
+            assertThat(result).isEqualTo("0");
+    }
 }
