@@ -21,9 +21,12 @@ public class StringCalculatorKata {
                 return numbersList.get(0).toString();
             }
 
+            if (numbersList.size() > 2) {
+                throw new IllegalArgumentException("Too many numbers: " + numbers);
+            }
+
             int sum = numbersList.get(0) + numbersList.get(1);
             return String.valueOf(sum);
-
 
         }
 }

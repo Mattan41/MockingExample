@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringCalculatorKataTest {
 
@@ -39,4 +41,13 @@ class StringCalculatorKataTest {
 
             assertThat(result).isEqualTo("0");
     }
+
+    @Test
+    void givenThreeNumbersSeparatedByCommaWhenCallingAddNumbersThenThrowException() {
+        String numbers = "1,2,3";
+        assertThrows(IllegalArgumentException.class, () -> {
+            String result = StringCalculatorKata.addNumbers(numbers);
+        });
+    }
+
 }
