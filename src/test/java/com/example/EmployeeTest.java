@@ -62,7 +62,6 @@ class EmployeeTest {
     void toStringReturnsAStringOfEmployee() {
         Employee employee = new Employee("1", 1000);
 
-        assertThat(employee.toString()).isEqualTo("Employee [id=1, salary=1000.0]");
-
+        assertThat(employee).hasToString("Employee [id=1, salary=1000.0]");
     }
 }
