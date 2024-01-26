@@ -8,23 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeTest {
 
+
     @Test
-    @DisplayName("getId returns id ")
-    void getIdReturnsId() {
+    @DisplayName("creating Employee With Constructor sets Employee Id")
+    void creatingEmployeeWithConstructorSetsEmployeeId() {
         Employee employee = new Employee("1", 1000);
 
         assertEquals("1", employee.getId());
     }
 
     @Test
-    @DisplayName("setId sets new Id for Employee")
-    void setIdSetsNewIdForEmployee() {
+    @DisplayName("Employee Id can be changed")
+    void employeeIdCanBeChanged() {
         Employee employee = new Employee("1", 1000);
 
         employee.setId("2");
 
         assertThat(employee.getId()).isEqualTo("2");
-
 
     }
 
@@ -63,5 +63,6 @@ class EmployeeTest {
         Employee employee = new Employee("1", 1000);
 
         assertThat(employee.toString()).isEqualTo("Employee [id=1, salary=1000.0]");
+
     }
 }
