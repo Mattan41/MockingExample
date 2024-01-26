@@ -40,11 +40,19 @@ class StringCalculatorKataTest {
             assertThat(result).isEqualTo("0");
     }
 
-    @Test
-    void givenThreeNumbersSeparatedByCommaWhenCallingAddNumbersThenThrowException() {
-        String numbers = "1,2,3";
-        assertThrows(IllegalArgumentException.class, () -> { StringCalculatorKata.addNumbers(numbers);
-        });
-    }
+//    @Test
+//    @DisplayName("given three numbers separated by comma when calling addNumbers then throw exception")
+//    void givenThreeNumbersSeparatedByCommaWhenCallingAddNumbersThenThrowException() {
+//        String numbers = "1,2,3";
+//        assertThrows(IllegalArgumentException.class, () -> { StringCalculatorKata.addNumbers(numbers);
+//        });
+//    }
 
+    @Test
+    @DisplayName("given large amount of numbers when calling addNumbers then return sum of numbers")
+    void givenLargeAmountOfNumbersWhenCallingAddNumbersThenReturnSumOfNumbers() {
+        String numbers = "1,2,3,4,5,6,7,8,9,10";
+        String result = StringCalculatorKata.addNumbers(numbers);
+        assertThat(result).isEqualTo("55");
+    }
 }
