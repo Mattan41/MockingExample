@@ -4,22 +4,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StringCalculatorKataTest {
+class StringCalculatorKataTest {
 
 
     @Test
-    @DisplayName("given two numbers when calling addNumbers, then return sum of numbers")
-    void givenTwoNumbersWhenCallingAddNumbersThenReturnSumOfNumbers() {
-        //Given - Arrange
-        String a = "1";
-        String b = "2";
+    @DisplayName("given two numbers separated by comma, when calling addNumbers, then return sum of numbers")
+    void givenTwoNumbersSeparatedByCommaWhenCallingAddNumbersThenReturnSumOfNumbers() {
 
-        //When - Act
-        String result = StringCalculatorKata.addNumbers(a, b);
+        String numbers = "1,2";
 
-        //Then - Assert
+        String result = StringCalculatorKata.addNumbers(numbers);
+
         assertThat(result).isEqualTo("3");
     }
 
