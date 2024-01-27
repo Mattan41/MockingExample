@@ -55,4 +55,13 @@ class StringCalculatorKataTest {
         String result = StringCalculatorKata.addNumbers(numbers);
         assertThat(result).isEqualTo("55");
     }
+
+    @Test
+    @DisplayName("numbers can also be separated by new line")
+    void numbersCanAlsoBeSeparatedByNewLine() {
+        String numbers = "1\n2,3";
+        String result = StringCalculatorKata.addNumbers(numbers);
+        assertThat(result).isEqualTo("6");
+    }
+
 }

@@ -12,7 +12,7 @@ public class StringCalculatorKata {
             if (numbers.isEmpty())
                 return "0";
 
-            String[] numbersArray = numbers.split(",");
+            String[] numbersArray = numbers.split(",|\n");
             List<Integer> numbersList = new ArrayList<>();
 
             for (String number : numbersArray) {
