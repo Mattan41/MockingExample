@@ -15,7 +15,7 @@ public class StringCalculatorKata {
                 return "0";
 
 
-           Pattern pattern = Pattern.compile("^//(.)\n");
+            Pattern pattern = Pattern.compile("^//\\[(.+?)]\\n");
             Matcher matcher = pattern.matcher(numbers);
 
             String delimiter;
@@ -27,7 +27,7 @@ public class StringCalculatorKata {
                 delimiter = "[,\n]";
             }
 
-            String[] numbersArray = numbers.split(delimiter);
+            String[] numbersArray = numbers.split(Pattern.quote(delimiter));
             List<Integer> numbersList = new ArrayList<>();
 
             for (String number : numbersArray) {

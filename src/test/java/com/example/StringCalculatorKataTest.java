@@ -97,4 +97,14 @@ class StringCalculatorKataTest {
         String result = StringCalculatorKata.addNumbers(numbers);
         assertThat(result).isEqualTo("2");
     }
+
+    @Test
+    @DisplayName("given a delimiter of any length when calling addNumbers then return sum of numbers")
+    void givenADelimiterOfAnyLengthWhenCallingAddNumbersThenReturnSumOfNumbers() {
+        String numbers = "//[***]\n1***2***3";
+        String result = StringCalculatorKata.addNumbers(numbers);
+        assertThat(result).isEqualTo("6");
+
+    }
+
 }
