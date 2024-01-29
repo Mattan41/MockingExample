@@ -34,9 +34,20 @@ public class StringCalculatorKata {
                     numbersList.add(Integer.parseInt(number));
                 }
 
-            for (String number : numbersArray) {
-                sum += Integer.parseInt(number);
+            List<Integer> negativeNumbers = new ArrayList<>();
+
+            for (Integer number : numbersList) {
+
+                if (number < 0)
+                    negativeNumbers.add(number);
+                 else
+                    sum += number;
             }
+
+
+            if (!negativeNumbers.isEmpty())
+                throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
+
 
             return String.valueOf(sum);
 

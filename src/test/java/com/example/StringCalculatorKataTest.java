@@ -71,4 +71,22 @@ class StringCalculatorKataTest {
         String result = StringCalculatorKata.addNumbers(numbers);
         assertThat(result).isEqualTo("3");
     }
+
+    @Test
+    @DisplayName("Calling addNumbers with negative numbers will throw an exception")
+    void callingAddNumbersWithNegativeNumbersWillThrowAnException() {
+        String numbers = "-1,2";
+        assertThrows(IllegalArgumentException.class, () -> { StringCalculatorKata.addNumbers(numbers);
+        });
+
+    }
+
+    @Test
+    @DisplayName("Calling addNumbers with negative numbers throws an exception with the negative numbers in the exception message")
+    void callingAddNumbersWithNegativeNumbersThrowsAnExceptionWithTheNegativeNumbersInTheExceptionMessage() {
+        String numbers = "-1,2,-3";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> { StringCalculatorKata.addNumbers(numbers);
+        });
+        assertThat(exception.getMessage()).isEqualTo("Negatives not allowed: [-1, -3]");
+    }
 }
