@@ -64,4 +64,11 @@ class StringCalculatorKataTest {
         assertThat(result).isEqualTo("6");
     }
 
+    @Test
+    @DisplayName("It should be possible to change delimiter")
+    void itShouldBePossibleToChangeDelimiter() {
+        String numbers = "//;\n1;2";
+        String result = StringCalculatorKata.addNumbers(numbers);
+        assertThat(result).isEqualTo("3");
+    }
 }

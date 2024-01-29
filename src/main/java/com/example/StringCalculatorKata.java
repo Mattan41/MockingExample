@@ -2,6 +2,8 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculatorKata {
 
@@ -12,7 +14,20 @@ public class StringCalculatorKata {
             if (numbers.isEmpty())
                 return "0";
 
-            String[] numbersArray = numbers.split(",|\n");
+
+           Pattern pattern = Pattern.compile("^//(.)\n");
+            Matcher matcher = pattern.matcher(numbers);
+
+            String delimiter;
+
+            if (matcher.find()) {
+                delimiter = matcher.group(1);
+                numbers = numbers.substring(matcher.end());
+            } else {
+                delimiter = "[,\n]";
+            }
+
+            String[] numbersArray = numbers.split(delimiter);
             List<Integer> numbersList = new ArrayList<>();
 
             for (String number : numbersArray) {
