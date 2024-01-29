@@ -4,63 +4,72 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringCalculatorKata {
 
-        public static String addNumbers(String numbers) {
+    public static String addNumbers(String numbers) {
 
-            int sum = 0;
+        int sum = 0;
 
-            if (numbers.isEmpty())
-                return "0";
+        if (numbers.isEmpty())
+            return "0";
 
-            Pattern pattern = Pattern.compile("^//(?:\\[(.+?)]|(.+?))\n");
+        Pattern pattern = Pattern.compile("^//((?:\\[(.+?)]|(.+?))*)\n");
 
+        Matcher matcher = pattern.matcher(numbers);
 
-            Matcher matcher = pattern.matcher(numbers);
+        List<String> delimiters = new ArrayList<>();
 
-            String delimiter;
+        String[] numbersArray;
 
-            String[] numbersArray;
+        if (matcher.find()) {
 
-            if (matcher.find()) {
+            String delimiterString = matcher.group(1);
 
-                if (matcher.group(1) != null)
-                    delimiter = matcher.group(1);
+            Pattern delimiterPattern = Pattern.compile("\\[(.+?)]");
 
-                else
-                    delimiter = matcher.group(2);
+            Matcher delimiterMatcher = delimiterPattern.matcher(delimiterString);
 
-                numbers = numbers.substring(matcher.end());
-                numbersArray = numbers.split(Pattern.quote(delimiter));
-            } else {
-                delimiter = "[,\n]"; //default delimiter
-                numbersArray = numbers.split(delimiter);
+            while (delimiterMatcher.find()) {
+                delimiters.add(Pattern.quote(delimiterMatcher.group(1)));
             }
 
-            List<Integer> numbersList = new ArrayList<>();
-
-            for (String number : numbersArray) {
-                    numbersList.add(Integer.parseInt(number));
-                }
-
-            List<Integer> negativeNumbers = new ArrayList<>();
-
-            for (Integer number : numbersList) {
-
-                if (number < 0)
-                    negativeNumbers.add(number);
-                else if (number <= 1000)
-                    sum += number;
-
+            if (delimiters.isEmpty()) {
+                delimiters.add(Pattern.quote(delimiterString));
             }
 
+            numbers = numbers.substring(matcher.end());
 
-            if (!negativeNumbers.isEmpty())
-                throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
+            String delimitersRegex = String.join("|", delimiters);
 
+            numbersArray = numbers.split(delimitersRegex);
 
-            return String.valueOf(sum);
+        } else {
+            String delimiter = "[,\n]"; //default delimiter
+            numbersArray = numbers.split(delimiter);
+        }
+
+        List<Integer> numbersList = new ArrayList<>();
+
+        for (String number : numbersArray) {
+            numbersList.add(Integer.parseInt(number));
+        }
+
+        List<Integer> negativeNumbers = new ArrayList<>();
+
+        for (Integer number : numbersList) {
+
+            if (number < 0)
+                negativeNumbers.add(number);
+            else if (number <= 1000)
+                sum += number;
 
         }
+
+        if (!negativeNumbers.isEmpty())
+            throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
+
+        return String.valueOf(sum);
+    }
 }

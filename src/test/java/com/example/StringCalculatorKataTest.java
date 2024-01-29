@@ -107,4 +107,11 @@ class StringCalculatorKataTest {
 
     }
 
+    @Test
+    @DisplayName("given multiple delimiters when calling addNumbers then return sum of numbers")
+    void givenMultipleDelimitersWhenCallingAddNumbersThenReturnSumOfNumbers() {
+        String numbers = "//[*][%]\n1*2%3";
+        String result = StringCalculatorKata.addNumbers(numbers);
+        assertThat(result).isEqualTo("6");
+    }
 }
