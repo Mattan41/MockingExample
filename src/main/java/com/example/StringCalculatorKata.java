@@ -40,8 +40,9 @@ public class StringCalculatorKata {
 
                 if (number < 0)
                     negativeNumbers.add(number);
-                 else
+                else if (number <= 1000)
                     sum += number;
+
             }
 
 

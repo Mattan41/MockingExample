@@ -89,4 +89,12 @@ class StringCalculatorKataTest {
         });
         assertThat(exception.getMessage()).isEqualTo("Negatives not allowed: [-1, -3]");
     }
+
+    @Test
+    @DisplayName("given a number bigger than 1000 when calling addNumbers then ignore the number")
+    void givenANumberBiggerThan1000WhenCallingAddNumbersThenIgnoreTheNumber() {
+        String numbers = "1001,2";
+        String result = StringCalculatorKata.addNumbers(numbers);
+        assertThat(result).isEqualTo("2");
+    }
 }
