@@ -114,4 +114,12 @@ class StringCalculatorKataTest {
         String result = StringCalculatorKata.addNumbers(numbers);
         assertThat(result).isEqualTo("6");
     }
+
+    @Test
+    @DisplayName("given multiple delimiters with length longer than one char when calling addNumbers then return sum of numbers")
+    void givenMultipleDelimitersWithLengthLongerThanOneCharWhenCallingAddNumbersThenReturnSumOfNumbers() {
+        String numbers = "//[***][%%%]\n1***2%%%3";
+        String result = StringCalculatorKata.addNumbers(numbers);
+        assertThat(result).isEqualTo("6");
+    }
 }
