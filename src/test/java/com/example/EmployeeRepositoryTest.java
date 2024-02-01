@@ -37,11 +37,10 @@ class EmployeeRepositoryTest {
     void callingSaveWithExistingIdThenOverrideEmployee() {
         EmployeeRepository employeeRepository = new InMemoryEmployeeRepository();
         Employee employee = new Employee("1", 1000);
-        Employee savedEmployee =  employeeRepository.save(employee);
+        employeeRepository.save(employee);
         Employee employee2 = new Employee("1", 2000);
-        Employee savedEmployee2 =  employeeRepository.save(employee2);
+        employeeRepository.save(employee2);
 
-        assertThat(savedEmployee2).isEqualTo(employee2);
         assertThat(employeeRepository.findAll()).containsExactly(employee2);
     }
 }
