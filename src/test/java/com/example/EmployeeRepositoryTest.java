@@ -4,9 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeRepositoryTest {
+
+
+
 
     @Test
     @DisplayName("when calling findAll then return all employees")
@@ -18,4 +20,15 @@ class EmployeeRepositoryTest {
 
         assertThat(employeeRepository.findAll()).hasSize(3);
         }
+
+    @Test
+    @DisplayName("when calling save then save employee")
+    void whenCallingSaveThenSaveEmployee() {
+        EmployeeRepository employeeRepository = new InMemoryEmployeeRepository();
+        Employee employee = new Employee("1", 1000);
+        Employee savedEmployee =  employeeRepository.save(employee);
+
+        assertThat(savedEmployee).isEqualTo(employee);
+        assertThat(employeeRepository.findAll()).containsExactly(employee);
+    }
 }
