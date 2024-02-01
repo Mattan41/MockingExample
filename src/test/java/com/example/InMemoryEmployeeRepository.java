@@ -1,17 +1,15 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.List;
 
-class  MockEmployeeRepository implements EmployeeRepository{
+class InMemoryEmployeeRepository implements EmployeeRepository{
 
-    List<Employee> employees = List.of(
-            new Employee("1", 1000),
-            new Employee("2", 2000),
-            new Employee("3", 3000));
+    private List<Employee> employees = new ArrayList<>();
 
     @Override
     public List<Employee> findAll() {
-        return employees;
+        return new ArrayList<>(employees);
     }
 
         @Override
