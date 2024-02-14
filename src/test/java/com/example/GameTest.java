@@ -33,19 +33,20 @@ class GameTest {
 
         assertThat(game.score()).isEqualTo(5);
     }
-//    @Test
-//    @DisplayName("given number of pins knocked down in the second roll in the same frame equals 10 then points added to total score should be equal to 10 plus the number of pins knocked down in the next roll")
-//    void givenNumberOfPinsKnockedDownInTheSecondRollInTheSameFrameEquals10ThenPointsAddedToTotalScoreShouldBeEqualTo10PlusTheNumberOfPinsKnockedDownInTheNextRoll() {
-//
-//            Game game = new Game();
-//            int pinsKnockedDownFirstRoll = 5;
-//            int pinsKnockedDownSecondRoll = 5;
-//            int pinsKnockedDownFirstRollNextFrame = 3;
-//
-//            game.roll(pinsKnockedDownFirstRoll);
-//            game.roll(pinsKnockedDownSecondRoll);
-//            game.roll(pinsKnockedDownFirstRollNextFrame);
-//
-//            assertThat(game.getTotalPoints()).isEqualTo(16);
-//    }
+
+    @Test
+    @DisplayName("given a spare then points added to total score should be equal to 10 plus the number of pins knocked down in the next roll")
+    void givenASpareThenPointsAddedToTotalScoreShouldBeEqualTo10PlusTheNumberOfPinsKnockedDownInTheNextRoll() {
+
+            Game game = new Game();
+            int pinsKnockedDownFirstRoll = 5;
+            int pinsKnockedDownSecondRoll = 5;
+            int pinsKnockedDownFirstRollNextFrame = 3;
+
+            game.roll(pinsKnockedDownFirstRoll);
+            game.roll(pinsKnockedDownSecondRoll);
+            game.roll(pinsKnockedDownFirstRollNextFrame);
+
+            assertThat(game.score()).isEqualTo(13);
+    }
 }
