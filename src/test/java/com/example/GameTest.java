@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class GameTest {
     @Test
@@ -49,4 +50,30 @@ class GameTest {
 
             assertThat(game.score()).isEqualTo(13);
     }
+
+    @Test
+    @DisplayName("Strike should move the game to the next frame")
+    void strikeShouldMoveTheGameToTheNextFrame() {
+        Game game = new Game();
+
+        Frame firstFrame = game.getCurrentFrame();
+        game.roll(10); // Strike
+        Frame secondFrame = game.getCurrentFrame();
+
+        assertNotEquals(firstFrame, secondFrame);
+
+    }
+
+//    @Test
+//    @DisplayName("rolling less then strike on first roll should keep the game in the same frame")
+//    void rollingLessThenStrikeOnFirstRollShouldKeepTheGameInTheSameFrame() {
+//        Game game = new Game();
+//
+//        Frame firstFrame = game.getCurrentFrame();
+//        game.roll(9); // not Strike
+//        Frame secondFrame = game.getCurrentFrame();
+//
+//        assertThat(firstFrame).isEqualTo(secondFrame);
+//    }
+
 }

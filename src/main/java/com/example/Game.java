@@ -18,6 +18,10 @@ public class Game {
         this.totalPoints = totalPoints;
     }
 
+    public Frame getCurrentFrame() {
+        return currentFrame;
+    }
+
     public void roll(int pinsKnockedDown) {
         currentFrame.roll(pinsKnockedDown);
         if (currentFrame.isSpare() || currentFrame.score() != 0) {
@@ -37,5 +41,4 @@ public class Game {
         }
         return totalScore;
     }
-
 }

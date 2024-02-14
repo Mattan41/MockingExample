@@ -4,10 +4,14 @@ public class Frame {
     private int firstRoll;
     private int secondRoll;
     private boolean isSpare;
+    private boolean isStrike;
 
     public void roll(int pinsKnockedDown) {
         if (firstRoll == 0) {
             firstRoll = pinsKnockedDown;
+            if (firstRoll == 10)
+                isStrike = true;
+
         } else {
             secondRoll = pinsKnockedDown;
             if (firstRoll + secondRoll == 10) {
@@ -24,8 +28,16 @@ public class Frame {
         return isSpare;
     }
 
+    public boolean isStrike() {
+        return isStrike;
+    }
+
     public int getFirstRoll() {
         return firstRoll;
+    }
+
+    public int getSecondRoll() {
+        return secondRoll;
     }
 
 }
