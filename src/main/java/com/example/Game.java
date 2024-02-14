@@ -42,6 +42,15 @@ public class Game {
             if (frame.isSpare() && i + 1 < frames.size()) {
                 totalScore += frames.get(i + 1).getFirstRoll();
             }
+            if (frame.isStrike() && i + 1 < frames.size()) {
+                Frame nextFrame = frames.get(i + 1);
+                totalScore += nextFrame.getFirstRoll();
+                if (nextFrame.isStrike() && i + 2 < frames.size()) {
+                    totalScore += frames.get(i + 2).getFirstRoll();
+                } else if (nextFrame.getSecondRoll() != null) {
+                    totalScore += nextFrame.getSecondRoll();
+                }
+            }
         }
         totalScore += currentFrame.score();
         return totalScore;

@@ -76,4 +76,20 @@ class GameTest {
         assertThat(firstFrame).isEqualTo(secondFrame);
     }
 
+    @Test
+    @DisplayName("given a Strike then points added to total score should be equal to 10 plus the number of pins knocked down in the next two rolls")
+    void givenAStrikeThenPointsAddedToTotalScoreShouldBeEqualTo10PlusTheNumberOfPinsKnockedDownInTheNextTwoRolls() {
+
+        Game game = new Game();
+        int pinsKnockedDownFirstRoll = 10;
+        int pinsKnockedDownFirstRollNextFrame = 3;
+        int pinsKnockedDownSecondRollNextFrame = 4;
+
+        game.roll(pinsKnockedDownFirstRoll);
+        game.roll(pinsKnockedDownFirstRollNextFrame);
+        game.roll(pinsKnockedDownSecondRollNextFrame);
+
+        assertThat(game.score()).isEqualTo(24);
+    }
+
 }
