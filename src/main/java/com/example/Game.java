@@ -43,21 +43,36 @@ public class Game {
         for (int i = 0; i < frames.size(); i++) {
             Frame frame = frames.get(i);
             totalScore += frame.score();
-            if (frame.isSpare() && i + 1 < frames.size()) {
-                totalScore += frames.get(i + 1).getFirstRoll();
+            if (frame.isSpare()) {
+                totalScore += spareBonus(i);
             }
-            if (frame.isStrike() && i + 1 < frames.size()) {
-                Frame nextFrame = frames.get(i + 1);
-                totalScore += nextFrame.getFirstRoll();
-                if (nextFrame.isStrike() && i + 2 < frames.size()) {
-                    totalScore += frames.get(i + 2).getFirstRoll();
-                } else if (nextFrame.getSecondRoll() != null) {
-                    totalScore += nextFrame.getSecondRoll();
-                }
+            if (frame.isStrike()) {
+                totalScore += strikeBonus(i);
             }
         }
         totalScore += currentFrame.score();
         return totalScore;
+    }
+
+    private int spareBonus(int frameIndex) {
+        if (frameIndex + 1 < frames.size()) {
+            return frames.get(frameIndex + 1).getFirstRoll();
+        }
+        return 0;
+    }
+
+    private int strikeBonus(int frameIndex) {
+        if (frameIndex + 1 < frames.size()) {
+            Frame nextFrame = frames.get(frameIndex + 1);
+            int bonus = nextFrame.getFirstRoll();
+            if (nextFrame.isStrike() && frameIndex + 2 < frames.size()) {
+                bonus += frames.get(frameIndex + 2).getFirstRoll();
+            } else if (nextFrame.getSecondRoll() != null) {
+                bonus += nextFrame.getSecondRoll();
+            }
+            return bonus;
+        }
+        return 0;
     }
 
     public int getFrameCount() {
