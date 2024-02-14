@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GameTest {
     @Test
@@ -107,6 +108,16 @@ class GameTest {
         game.roll(pinsKnockedDownSecondRollNextFrame);
 
         assertThat(game.score()).isEqualTo(20);
+    }
+
+    @Test
+    @DisplayName("the game should not allow more than 10 frames")
+    void theGameShouldNotAllowMoreThan10Frames() {
+        Game game = new Game();
+        for (int i = 0; i < 20; i++) {
+            game.roll(0);
+        }
+        assertThrows(IllegalStateException.class, () -> game.roll(0));
     }
 
 }
