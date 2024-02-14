@@ -92,4 +92,21 @@ class GameTest {
         assertThat(game.score()).isEqualTo(24);
     }
 
+    @Test
+    @DisplayName("Rolling 0 on first roll then 10 on the second should count as a spare")
+    void rolling0OnFirstRollThen10OnTheSecondShouldCountAsASpare() {
+        Game game = new Game();
+        int pinsKnockedDownFirstRoll = 0;
+        int pinsKnockedDownSecondRoll = 10;
+        int pinsKnockedDownFirstRollNextFrame = 3;
+        int pinsKnockedDownSecondRollNextFrame = 4;
+
+        game.roll(pinsKnockedDownFirstRoll);
+        game.roll(pinsKnockedDownSecondRoll);
+        game.roll(pinsKnockedDownFirstRollNextFrame);
+        game.roll(pinsKnockedDownSecondRollNextFrame);
+
+        assertThat(game.score()).isEqualTo(20);
+    }
+
 }
