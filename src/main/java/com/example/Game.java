@@ -1,19 +1,27 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
 
 
-    private int totalPoints;
+    private List<Integer> totalPoints = new ArrayList<>();
 
-    public int getTotalPoints() {
+
+    public List<Integer> getTotalPoints() {
         return totalPoints;
     }
 
-    public void setTotalPoints(int totalPoints) {
+    public void setTotalPoints(List<Integer> totalPoints) {
         this.totalPoints = totalPoints;
     }
 
-    public void roll(int pinsKnockedDown) {
-        totalPoints += pinsKnockedDown;
+    public void roll(Integer pinsKnockedDown) {
+        totalPoints.add(pinsKnockedDown);
+    }
+
+    public int score() {
+        return totalPoints.stream().mapToInt(Integer::intValue).sum();
     }
 }
