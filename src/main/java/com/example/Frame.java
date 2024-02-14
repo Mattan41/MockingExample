@@ -2,15 +2,14 @@ package com.example;
 
 public class Frame {
     private int firstRoll;
-    private int secondRoll;
+    private Integer secondRoll;
     private boolean isSpare;
     private boolean isStrike;
 
     public void roll(int pinsKnockedDown) {
         if (firstRoll == 0) {
             firstRoll = pinsKnockedDown;
-            if (firstRoll == 10)
-                isStrike = true;
+            if (firstRoll == 10) isStrike = true;
 
         } else {
             secondRoll = pinsKnockedDown;
@@ -21,7 +20,11 @@ public class Frame {
     }
 
     public int score() {
-        return firstRoll + secondRoll;
+        if (secondRoll == null) {
+            return firstRoll;
+        } else {
+            return firstRoll + secondRoll;
+        }
     }
 
     public boolean isSpare() {
@@ -36,7 +39,7 @@ public class Frame {
         return firstRoll;
     }
 
-    public int getSecondRoll() {
+    public Integer getSecondRoll() {
         return secondRoll;
     }
 

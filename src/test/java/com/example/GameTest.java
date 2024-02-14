@@ -39,16 +39,16 @@ class GameTest {
     @DisplayName("given a spare then points added to total score should be equal to 10 plus the number of pins knocked down in the next roll")
     void givenASpareThenPointsAddedToTotalScoreShouldBeEqualTo10PlusTheNumberOfPinsKnockedDownInTheNextRoll() {
 
-            Game game = new Game();
-            int pinsKnockedDownFirstRoll = 5;
-            int pinsKnockedDownSecondRoll = 5;
-            int pinsKnockedDownFirstRollNextFrame = 3;
+        Game game = new Game();
+        int pinsKnockedDownFirstRoll = 5;
+        int pinsKnockedDownSecondRoll = 5;
+        int pinsKnockedDownFirstRollNextFrame = 3;
 
-            game.roll(pinsKnockedDownFirstRoll);
-            game.roll(pinsKnockedDownSecondRoll);
-            game.roll(pinsKnockedDownFirstRollNextFrame);
+        game.roll(pinsKnockedDownFirstRoll);
+        game.roll(pinsKnockedDownSecondRoll);
+        game.roll(pinsKnockedDownFirstRollNextFrame);
 
-            assertThat(game.score()).isEqualTo(13);
+        assertThat(game.score()).isEqualTo(13);
     }
 
     @Test
@@ -64,16 +64,16 @@ class GameTest {
 
     }
 
-//    @Test
-//    @DisplayName("rolling less then strike on first roll should keep the game in the same frame")
-//    void rollingLessThenStrikeOnFirstRollShouldKeepTheGameInTheSameFrame() {
-//        Game game = new Game();
-//
-//        Frame firstFrame = game.getCurrentFrame();
-//        game.roll(9); // not Strike
-//        Frame secondFrame = game.getCurrentFrame();
-//
-//        assertThat(firstFrame).isEqualTo(secondFrame);
-//    }
+    @Test
+    @DisplayName("rolling less than strike on first roll should keep the game in the same frame")
+    void rollingLessThanStrikeOnFirstRollShouldKeepTheGameInTheSameFrame() {
+        Game game = new Game();
+
+        Frame firstFrame = game.getCurrentFrame();
+        game.roll(9); // not Strike
+        Frame secondFrame = game.getCurrentFrame();
+
+        assertThat(firstFrame).isEqualTo(secondFrame);
+    }
 
 }

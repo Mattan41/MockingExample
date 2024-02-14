@@ -24,10 +24,14 @@ public class Game {
 
     public void roll(int pinsKnockedDown) {
         currentFrame.roll(pinsKnockedDown);
-        if (currentFrame.isSpare() || currentFrame.score() != 0) {
-            frames.add(currentFrame);
-            currentFrame = new Frame();
+        if (currentFrame.isStrike() || (currentFrame.getSecondRoll() != null)) {
+            nextFrame();
         }
+    }
+
+    private void nextFrame() {
+        frames.add(currentFrame);
+        currentFrame = new Frame();
     }
 
     public int score() {
@@ -39,6 +43,7 @@ public class Game {
                 totalScore += frames.get(i + 1).getFirstRoll();
             }
         }
+        totalScore += currentFrame.score();
         return totalScore;
     }
 }
