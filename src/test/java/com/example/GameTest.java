@@ -161,4 +161,23 @@ class GameTest {
 
         assertThat(game.score()).isEqualTo(20);
     }
+
+    @Test
+    @DisplayName("in the 10th frame, if a strike is rolled, the score should include the bonus roll")
+    void inThe10ThFrameIfAStrikeIsRolledTheScoreShouldIncludeTheBonusRoll() {
+        Game game = new Game();
+        for (int i = 0; i < 18; i++) {
+            game.roll(0);
+        }
+        game.roll(10);
+        System.out.println(game.score());
+        game.roll(10);
+        System.out.println(game.score());
+        game.roll(10);
+        System.out.println(game.score());
+
+        assertThat(game.score()).isEqualTo(30);
+    }
+
+
 }
