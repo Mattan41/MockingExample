@@ -4,8 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
     @Test
@@ -118,6 +117,7 @@ class GameTest {
             game.roll(0);
         }
         assertThrows(IllegalStateException.class, () -> game.roll(0));
+        assertEquals("Cannot roll after the 10th frame", assertThrows(IllegalStateException.class, () -> game.roll(0)).getMessage());
     }
 
     @Test
