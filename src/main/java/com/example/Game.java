@@ -8,7 +8,7 @@ public class Game {
     private List<Integer> totalPoints = new ArrayList<>();
 
     private List<Frame> frames = new ArrayList<>();
-    private Frame currentFrame = new Frame();
+    private Frame currentFrame = new Frame(false);
 
     public List<Integer> getTotalPoints() {
         return totalPoints;
@@ -23,19 +23,22 @@ public class Game {
     }
 
     public void roll(int pinsKnockedDown) {
-
-        if (getFrameCount() >= 10)
+        if (getFrameCount() >= 10 && !currentFrame.isSpare() && !currentFrame.isStrike())
             throw new IllegalStateException("Cannot roll after the 10th frame");
 
         currentFrame.roll(pinsKnockedDown);
-        if (currentFrame.isStrike() || (currentFrame.getSecondRoll() != null)) {
+        if (getFrameCount() < 10 && (currentFrame.isStrike() || currentFrame.isComplete())) {
             nextFrame();
         }
     }
 
     private void nextFrame() {
         frames.add(currentFrame);
-        currentFrame = new Frame();
+        if (frames.size() == 9) {
+            currentFrame = new Frame(true); // It's the 10th frame
+        } else {
+            currentFrame = new Frame(false); // It's not the 10th frame
+        }
     }
 
     public int score() {
@@ -43,14 +46,17 @@ public class Game {
         for (int i = 0; i < frames.size(); i++) {
             Frame frame = frames.get(i);
             totalScore += frame.score();
-            if (frame.isSpare()) {
+            if (frame.isSpare() && i < frames.size() - 1) {
                 totalScore += spareBonus(i);
             }
-            if (frame.isStrike()) {
+            if (frame.isStrike() && i < frames.size() - 1) {
                 totalScore += strikeBonus(i);
             }
         }
         totalScore += currentFrame.score();
+        if (getFrameCount() == 9 && (currentFrame.isSpare() || currentFrame.isStrike())) {
+            totalScore += currentFrame.getThirdRoll();
+        }
         return totalScore;
     }
 

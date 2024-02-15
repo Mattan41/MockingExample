@@ -3,30 +3,41 @@ package com.example;
 public class Frame {
     private Integer firstRoll;
     private Integer secondRoll;
+    private Integer thirdRoll;
     private boolean isSpare;
     private boolean isStrike;
+    private boolean isTenthFrame;
 
+    public Frame(boolean isTenthFrame) {
+        this.isTenthFrame = isTenthFrame;
+    }
     public void roll(int pinsKnockedDown) {
         if (firstRoll == null) {
             firstRoll = pinsKnockedDown;
             if (firstRoll == 10) isStrike = true;
-
-        } else {
+        } else if (secondRoll == null) {
             secondRoll = pinsKnockedDown;
             if (firstRoll + secondRoll == 10) {
                 isSpare = true;
             }
+        } else if (isTenthFrame && (isSpare || isStrike)) {
+            thirdRoll = pinsKnockedDown;
         }
     }
 
     public int score() {
-        if (firstRoll == null) {
-            return 0;
-        } else if (secondRoll == null) {
-            return firstRoll;
-        } else {
-            return firstRoll + secondRoll;
+        int score = 0;
+        if (firstRoll != null) score += firstRoll;
+        if (secondRoll != null) score += secondRoll;
+        if (thirdRoll != null) score += thirdRoll;
+        return score;
+    }
+
+    public boolean isComplete() {
+        if (isTenthFrame && (isSpare || isStrike)) {
+            return firstRoll != null && secondRoll != null && thirdRoll != null;
         }
+        return (firstRoll != null && secondRoll != null) || isStrike;
     }
 
     public boolean isSpare() {
@@ -43,6 +54,10 @@ public class Frame {
 
     public Integer getSecondRoll() {
         return secondRoll;
+    }
+
+    public Integer getThirdRoll() {
+        return thirdRoll;
     }
 
 }
