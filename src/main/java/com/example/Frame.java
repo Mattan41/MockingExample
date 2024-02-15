@@ -64,5 +64,7 @@ public void roll(int pinsKnockedDown) {
     public Integer getThirdRoll() {
         return thirdRoll;
     }
-
+    public boolean isTenthFrame() {
+        return isTenthFrame;
+    }
 }

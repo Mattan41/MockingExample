@@ -34,9 +34,9 @@ public void roll(int pinsKnockedDown) {
     private void nextFrame() {
         frames.add(currentFrame);
         if (frames.size() == 9) {
-            currentFrame = new Frame(true); // It's the 10th frame
+            currentFrame = new Frame(true);
         } else {
-            currentFrame = new Frame(false); // It's not the 10th frame
+            currentFrame = new Frame(false);
         }
     }
 
@@ -45,22 +45,31 @@ public void roll(int pinsKnockedDown) {
         for (int i = 0; i < frames.size(); i++) {
             Frame frame = frames.get(i);
             totalScore += frame.score();
-            if (frame.isSpare() && i < frames.size() - 1) {
+            if (frame.isSpare() && i < frames.size() - 1 && frames.get(i + 1).getFirstRoll() != null) {
                 totalScore += spareBonus(i);
             }
-            if (frame.isStrike() && i < frames.size() - 1) {
+            if (frame.isStrike() && i < frames.size() - 1 && frames.get(i + 1).getFirstRoll() != null) {
                 totalScore += strikeBonus(i);
             }
         }
+
         totalScore += currentFrame.score();
-        if (getFrameCount() == 9 && (currentFrame.isSpare() || currentFrame.isStrike())) {
-            totalScore += currentFrame.getThirdRoll();
+
+        if (frames.size() == 10) {
+            Frame tenthFrame = frames.get(9);
+            if ((tenthFrame.isSpare() || tenthFrame.isStrike()) && tenthFrame.getThirdRoll() != null) {
+                totalScore += tenthFrame.getThirdRoll();
+            }
         }
+
         return totalScore;
     }
 
     private int spareBonus(int frameIndex) {
-        if (frameIndex + 1 < frames.size()) {
+        Frame frame = frames.get(frameIndex);
+        if (frame.isTenthFrame()) {
+            return frame.getSecondRoll();
+        } else if (frameIndex + 1 < frames.size()) {
             return frames.get(frameIndex + 1).getFirstRoll();
         }
         return 0;

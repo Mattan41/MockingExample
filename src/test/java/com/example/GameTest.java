@@ -148,4 +148,17 @@ class GameTest {
         assertThrows(IllegalStateException.class, () -> game.roll(5));
     }
 
+    @Test
+    @DisplayName("in the 10th frame, if a spare is rolled, the score should include the bonus roll")
+    void inThe10ThFrameIfASpareIsRolledTheScoreShouldIncludeTheBonusRoll() {
+        Game game = new Game();
+        for (int i = 0; i < 18; i++) {
+            game.roll(0);
+        }
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+
+        assertThat(game.score()).isEqualTo(20);
+    }
 }
