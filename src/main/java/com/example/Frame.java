@@ -12,23 +12,23 @@ public class Frame {
         this.isTenthFrame = isTenthFrame;
     }
 
-public void roll(int pinsKnockedDown) {
-    if (firstRoll == null) {
-        firstRoll = pinsKnockedDown;
-        if (firstRoll == 10) {
-            isStrike = true;
+    public void roll(int pinsKnockedDown) {
+        if (firstRoll == null) {
+            firstRoll = pinsKnockedDown;
+            if (firstRoll == 10) {
+                isStrike = true;
+            }
+        } else if (secondRoll == null) {
+            secondRoll = pinsKnockedDown;
+            if (firstRoll + secondRoll == 10) {
+                isSpare = true;
+            }
+        } else if (isTenthFrame && (isSpare || isStrike)) {
+            thirdRoll = pinsKnockedDown;
+        } else {
+            throw new IllegalStateException("Cannot roll more than twice in a frame, unless it's the 10th frame with a strike or a spare");
         }
-    } else if (secondRoll == null) {
-        secondRoll = pinsKnockedDown;
-        if (firstRoll + secondRoll == 10) {
-            isSpare = true;
-        }
-    } else if (isTenthFrame && (isSpare || isStrike)) {
-        thirdRoll = pinsKnockedDown;
-    } else {
-        throw new IllegalStateException("Cannot roll more than twice in a frame, unless it's the 10th frame with a strike or a spare");
     }
-}
 
     public int score() {
         int score = 0;
@@ -64,6 +64,7 @@ public void roll(int pinsKnockedDown) {
     public Integer getThirdRoll() {
         return thirdRoll;
     }
+
     public boolean isTenthFrame() {
         return isTenthFrame;
     }

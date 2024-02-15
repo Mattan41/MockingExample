@@ -21,15 +21,16 @@ public class Game {
     public Frame getCurrentFrame() {
         return currentFrame;
     }
-public void roll(int pinsKnockedDown) {
-    if (getFrameCount() >= 10 && !currentFrame.isComplete())
-        throw new IllegalStateException("Cannot roll after the 10th frame");
 
-    currentFrame.roll(pinsKnockedDown);
-    if (getFrameCount() < 10 && currentFrame.isComplete()) {
-        nextFrame();
+    public void roll(int pinsKnockedDown) {
+        if (getFrameCount() >= 10 && !currentFrame.isComplete())
+            throw new IllegalStateException("Cannot roll after the 10th frame");
+
+        currentFrame.roll(pinsKnockedDown);
+        if (getFrameCount() < 10 && currentFrame.isComplete()) {
+            nextFrame();
+        }
     }
-}
 
     private void nextFrame() {
         frames.add(currentFrame);
@@ -66,10 +67,9 @@ public void roll(int pinsKnockedDown) {
     private static int getTotalScoreInLastFrame(Frame frame, int totalScore) {
         if (frame.isStrike()) {
             totalScore += 10 + frame.getSecondRoll() + frame.getThirdRoll();
-        }
-        else if (frame.getSecondRoll() + frame.getFirstRoll() == 10)
+        } else if (frame.getSecondRoll() + frame.getFirstRoll() == 10)
             totalScore += frame.getFirstRoll() + frame.getSecondRoll() + 2 * frame.getThirdRoll();
-         else {
+        else {
             totalScore += frame.score();
         }
         return totalScore;
