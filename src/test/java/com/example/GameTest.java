@@ -134,4 +134,18 @@ class GameTest {
         assertThrows(IllegalStateException.class, () -> game.roll(5));
     }
 
+    @Test
+    @DisplayName("in the 10th frame, after a strike, a third roll should be allowed but not a fourth")
+    void inThe10ThFrameAfterAStrikeAThirdRollShouldBeAllowedButNotAFourth() {
+        Game game = new Game();
+        for (int i = 0; i < 18; i++) {
+            game.roll(0);
+        }
+        game.roll(10);
+        game.roll(5);
+        game.roll(5);
+
+        assertThrows(IllegalStateException.class, () -> game.roll(5));
+    }
+
 }
