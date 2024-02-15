@@ -5,18 +5,8 @@ import java.util.List;
 
 public class Game {
 
-    private List<Integer> totalPoints = new ArrayList<>();
-
     private List<Frame> frames = new ArrayList<>();
     private Frame currentFrame = new Frame(false);
-
-    public List<Integer> getTotalPoints() {
-        return totalPoints;
-    }
-
-    public void setTotalPoints(List<Integer> totalPoints) {
-        this.totalPoints = totalPoints;
-    }
 
     public Frame getCurrentFrame() {
         return currentFrame;
