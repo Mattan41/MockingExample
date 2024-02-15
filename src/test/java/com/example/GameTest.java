@@ -170,14 +170,21 @@ class GameTest {
             game.roll(0);
         }
         game.roll(10);
-        System.out.println(game.score());
         game.roll(10);
-        System.out.println(game.score());
         game.roll(10);
-        System.out.println(game.score());
 
         assertThat(game.score()).isEqualTo(30);
     }
 
+    @Test
+    @DisplayName("given a perfect game then the score should be 300")
+    void givenAPerfectGameThenTheScoreShouldBe300() {
+        Game game = new Game();
+        for (int i = 0; i < 12; i++) {
+            game.roll(10);
+        }
+
+        assertThat(game.score()).isEqualTo(300);
+    }
 
 }
