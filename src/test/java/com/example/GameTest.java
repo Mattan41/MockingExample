@@ -187,4 +187,17 @@ class GameTest {
         assertThat(game.score()).isEqualTo(300);
     }
 
+    @Test
+    @DisplayName("given first roll is 0 and second roll is 10 should count as a spare")
+    void givenFirstRollIs0AndSecondIs10ShouldCountAsASpare() {
+        Game game = new Game();
+        game.roll(0);
+        game.roll(10);
+        game.roll(5);
+        game.roll(3);
+
+        assertThat(game.score()).isEqualTo(23);
+    }
+
+
 }
